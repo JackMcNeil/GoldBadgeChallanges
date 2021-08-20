@@ -75,7 +75,7 @@ namespace Challange_1.UI
             Console.Clear();
             bool properPrice = false;
             //Menu Number
-            int menuNumber = _menuNumber + 1;
+            int menuNumber = _menuNumber;
             _menuNumber++;
             //Name
             Console.WriteLine("What is the name of the new item?");
@@ -84,7 +84,6 @@ namespace Challange_1.UI
             Console.WriteLine("What is a desctiption of the new item?");
             string description = Console.ReadLine();
             //Ingredients
-            Console.WriteLine("What is the name of the new item?");
             List<string> ingredients = GetIngredients();
             //Price
             Console.WriteLine("What is the price of the new item?");
@@ -92,13 +91,14 @@ namespace Challange_1.UI
             while (!properPrice)
                 try
                 {
-                    price = double.Parse(Console.ReadLine());
+                    price = Math.Round(double.Parse(Console.ReadLine()),2);
                     properPrice = true;
                 }
                 catch
                 {
                     Console.WriteLine("You must enter a number");
                 }
+            //Add Item
             Menu newItem = new Menu(menuNumber, name, description, ingredients, price);
             _repo.AddMenuItem(newItem);
         }
@@ -109,7 +109,7 @@ namespace Challange_1.UI
             List<Menu> menuItems = _repo.GetMenuItems();
             foreach(Menu menu in menuItems)
             {
-                Console.WriteLine($"#{menu.MenuNumber} {menu.MealName}\n{menu.Description}\nIngredients: {menu.Ingredients}\nPrice: {menu.Price}\n\n");
+                Console.WriteLine($"#{menu.MenuNumber} {menu.MealName}\n{menu.Description}\nIngredients: {string.Join(", ",menu.Ingredients)}\nPrice: ${menu.Price}\n\n");
             }
             ContinueMessage();
         }
@@ -118,8 +118,20 @@ namespace Challange_1.UI
         {
             Console.Clear();
             Console.Write("Enter the menu number that you want to delete: ");
-
-            int id = int.Parse(Console.ReadLine());
+            bool aNumber = false;
+            int id = 0;
+            while(!aNumber)
+            {
+                try
+                {
+                    id = int.Parse(Console.ReadLine());
+                    aNumber = true;
+                }
+                catch
+                {
+                    Console.WriteLine("You must enter a number");
+                }
+            }
             Menu itemToDelete = _repo.GetMenuItemByID(id);
             if (itemToDelete == null)
             {
