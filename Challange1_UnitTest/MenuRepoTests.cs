@@ -15,7 +15,7 @@ namespace Challange1_UnitTest
         {
             List<string> ingredients = new List<string>() { "meat", "bun", "lettuce", "tomato" };
             _repo = new MenuRepository();
-            _menuItem = new Menu(5, "Burger", "A Juicy burger", ingredients, 9.99);
+            _menuItem = new Menu(1, "Burger", "A Juicy burger", ingredients, 9.99);
 
             _repo.AddMenuItem(_menuItem);
 
@@ -26,7 +26,7 @@ namespace Challange1_UnitTest
             //Arrange
             MenuRepository repo = new MenuRepository();
             List<string> ingredients = new List<string>() {"meat","bun","lettuce","tomato" };
-            Menu menuItem = new Menu(5,"Burger","A Juicy burger",ingredients,9.99);
+            Menu menuItem = new Menu(1,"Burger","A Juicy burger",ingredients,9.99);
             //Act
             bool addResult = repo.AddMenuItem(menuItem);
             //Assert
@@ -52,6 +52,16 @@ namespace Challange1_UnitTest
             bool deletedItem = _repo.DeleteMenuItems(_menuItem);
             //Assert
             Assert.IsTrue(deletedItem);
+        }
+
+        [TestMethod]
+        public void GetMenuItemByIDTest()
+        {
+            //Arrange
+            //Act
+            Menu menu = _repo.GetMenuItemByID(1);
+
+            Assert.AreEqual(_menuItem, menu);
         }
     }
 }

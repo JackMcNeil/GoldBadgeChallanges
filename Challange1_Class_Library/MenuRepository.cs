@@ -24,6 +24,18 @@ namespace Challange1_Class_Library
         {
             return _menuDirectory;
         }
+
+        public Menu GetMenuItemByID(int id)
+        {
+            foreach(Menu item in _menuDirectory)
+            {
+                if (item.MenuNumber == id)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
         //Update
         //Delete
         public bool DeleteMenuItems(Menu menuItem)
