@@ -9,6 +9,19 @@ namespace Challange2_ClassLibrary
     public enum ClaimTypes{ Car, Home, Theft};
     public class Claim
     {
+        //Constructors
+        public Claim() { }
+        public Claim(int claimId, ClaimTypes claimType, string description, double claimAmount, DateTime dateOfIncident, DateTime dateOfClaim)
+        {
+            ClaimId = claimId;
+            ClaimType = claimType;
+            Description = description;
+            ClaimAmount = claimAmount;
+            DateOfIncident = dateOfIncident;
+            DateOfClaim = dateOfClaim;
+        }
+
+        // Properties
         public int ClaimId { get; set; }
         public ClaimTypes ClaimType { get; set; }
         public string Description { get; set; }
@@ -20,6 +33,14 @@ namespace Challange2_ClassLibrary
             get
             {
                 TimeSpan length = DateOfClaim - DateOfIncident;
+                if (length.TotalDays >= 30)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
             }
         }
 
