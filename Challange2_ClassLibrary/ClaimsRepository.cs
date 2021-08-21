@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Challange2_ClassLibrary
 {
-    public class Class1
+    class ClaimsRepository
     {
     }
 }
