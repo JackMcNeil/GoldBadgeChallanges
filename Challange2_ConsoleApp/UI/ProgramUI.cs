@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using ClaimTypes = Challange2_ClassLibrary.ClaimTypes;
 
 namespace Challange2_ConsoleApp.UI
 {
@@ -51,12 +52,12 @@ namespace Challange2_ConsoleApp.UI
                         break;
                     case "2":
                     case "take car of next claim":
-                        //ShowAllItems();
+                        DealWithClaim();
                         break;
                     case "3":
                     case "enter":
                     case "enter a new claim":
-                        //DeleteItem();
+                        EnterNewClaim();
                         break;
                     case "4":
                     case "exit":
@@ -83,6 +84,125 @@ namespace Challange2_ConsoleApp.UI
             ContinueMessage();
         }
 
+        public void DealWithClaim()
+        {
+            Console.Clear();
+            //Getting queue to print
+            Queue<Claims> queueClaims = _repo.GetAllClaims();
+            Claims theQueue = queueClaims.Peek();
+            // Printing queue
+            Console.WriteLine("Here are the details for the next claim to be handled:");
+            Console.WriteLine($"ClaimID: {theQueue.ClaimId}\nType: {theQueue.ClaimType}\nDescription: {theQueue.Description}\nAmount: {theQueue.ClaimAmount}\nDateOfAccident: {theQueue.DateOfClaim.ToShortDateString()}\nDateOfClaim: {theQueue.DateOfIncident.ToShortDateString()}\nIsValid: {theQueue.IsValid}\n\n");
+            //Asking to deal with claim 
+            bool validResponse = false;
+            Console.Write("Do you want to deal with this claim now(y/n)? ");
+            string ans = Console.ReadLine().ToLower();
+            //Dealing with claim
+            while (!validResponse)
+            {
+                if (ans == "y")
+                {
+                    _repo.DeleteClaim();
+                    Console.WriteLine("Claim was dealt with!");
+                    ContinueMessage();
+                    validResponse = true;
+                }
+                else if (ans == "n")
+                {
+                    validResponse = true;
+                }
+                else
+                {
+                    Console.WriteLine("Not a valid repsonse");
+                    ContinueMessage();
+                }
+            }
+        }
+
+        public void EnterNewClaim()
+        {
+            Console.Clear();
+            Claims newClaim = new Claims();
+            //ID
+            newClaim.ClaimId = _id;
+            _id++;
+            //Type
+            bool valid = false;
+            while (!valid)
+            {
+                Console.Write("Enter the claim type (Car / Theft / Home): ");
+                string claimType = Console.ReadLine().ToLower();
+                switch (claimType)
+                {
+                    case "car":
+                        newClaim.ClaimType = ClaimTypes.Car;
+                        valid = true;
+                        break;
+                    case "theft":
+                        newClaim.ClaimType = ClaimTypes.Theft;
+                        valid = true;
+                        break;
+                    case "home":
+                        newClaim.ClaimType = ClaimTypes.Home;
+                        valid = true;
+                        break;
+                    default:
+                        Console.WriteLine("Not a valid entry");
+                        ContinueMessage();
+                        break;
+                }
+            }
+            //Description
+            Console.Write("Enter a claim description: ");
+            string description = Console.ReadLine();
+            newClaim.Description = description;
+            //Amount
+            Console.Write("Enter the amount of damage: ");
+            bool validAmount = false;
+            double amount = 0;
+            while (!validAmount)
+                try
+                {
+                    amount = Math.Round(Convert.ToDouble(Console.ReadLine()),2);
+                    validAmount = true;
+                }
+                catch
+                {
+                    Console.WriteLine("Not a valid number.");
+                }
+            newClaim.ClaimAmount = amount;
+            //Date of accident
+            DateTime accident = DateMaker();
+            newClaim.DateOfIncident = accident;
+            //Date of Claim
+            DateTime claim = DateMaker();
+            newClaim.DateOfClaim = claim;
+            //Add to repo
+            _repo.AddClaim(newClaim);
+        }
+
+        public DateTime DateMaker()
+        {
+            DateTime date;
+            bool validDate = false;
+            while (!validDate)
+            {
+                try
+                {
+                    string pattern = "M/dd/y";
+                    Console.Write("Date of Accident(mm/dd/yy): ");
+                    date = DateTime.ParseExact(Console.ReadLine(), pattern, null);
+                    validDate = true;
+                    return date;
+                }
+                catch
+                {
+                    Console.WriteLine("Not a valid date. Enter date in accordance with the format given");
+                    ContinueMessage();
+                }
+            }
+            return new DateTime(0, 0, 0);
+        }
 
         public void ContinueMessage()
         {
