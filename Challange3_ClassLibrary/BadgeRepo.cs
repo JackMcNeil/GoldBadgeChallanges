@@ -50,7 +50,6 @@ namespace Challange3_ClassLibrary
             bool inList = oldList.Contains(door);
             if (inList)
             {
-                Console.WriteLine($"Door {door} already stored for this badge");
                 return false;
             }
             else
@@ -67,7 +66,6 @@ namespace Challange3_ClassLibrary
             bool inList = oldList.Contains(door);
             if (!inList)
             {
-                Console.WriteLine($"Door {door} does not exist for this badge");
                 return false;
             }
             else
