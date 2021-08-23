@@ -46,5 +46,23 @@ namespace Challange3_UnitTest
 
             Assert.AreEqual(theBadge.BadgeID, _aBadge.BadgeID);
         }
+
+        [TestMethod]
+        public void UpdateandRemoveDoorToBadgeTests()
+        {
+            //Update
+            Badge badgeToCheck = _repo.GetBadgeById(420);
+            Console.WriteLine(string.Join(", ", badgeToCheck.DoorNames));
+
+            bool check = _repo.UpdateExistingBadge(420, "D7");
+
+            Console.WriteLine(string.Join(", ", badgeToCheck.DoorNames));
+            Assert.IsTrue(check);
+
+            //Remove
+            bool removeTest = _repo.RemoveExisitngDoor(420, "D7");
+            Console.WriteLine(string.Join(", ", badgeToCheck.DoorNames));
+            Assert.IsTrue(removeTest);
+        }
     }
 }

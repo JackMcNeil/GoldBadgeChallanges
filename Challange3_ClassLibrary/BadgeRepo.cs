@@ -43,6 +43,39 @@ namespace Challange3_ClassLibrary
             return null;
         }
 
+        //U
+        public bool UpdateExistingBadge(int id, string door)
+        {
+            List<string> oldList = _badgeDictionary[id];
+            bool inList = oldList.Contains(door);
+            if (inList)
+            {
+                Console.WriteLine($"Door {door} already stored for this badge");
+                return false;
+            }
+            else
+            {
+                oldList.Add(door);
+                _badgeDictionary[id] = oldList;
+                return true;
+            }
+        }
 
+        public bool RemoveExisitngDoor(int id, string door)
+        {
+            List<string> oldList = _badgeDictionary[id];
+            bool inList = oldList.Contains(door);
+            if (!inList)
+            {
+                Console.WriteLine($"Door {door} does not exist for this badge");
+                return false;
+            }
+            else
+            {
+                oldList.Remove(door);
+                _badgeDictionary[id] = oldList;
+                return true;
+            }
+        }
     }
 }
