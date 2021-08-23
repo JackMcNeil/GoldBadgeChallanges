@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace Challange2_ClassLibrary
 {
     public enum ClaimTypes{ Car, Home, Theft};
-    public class Claim
+    public class Claims
     {
         //Constructors
-        public Claim() { }
-        public Claim(int claimId, ClaimTypes claimType, string description, double claimAmount, DateTime dateOfIncident, DateTime dateOfClaim)
+        public Claims() { }
+        public Claims(int claimId, ClaimTypes claimType, string description, double claimAmount, DateTime dateOfIncident, DateTime dateOfClaim)
         {
             ClaimId = claimId;
             ClaimType = claimType;

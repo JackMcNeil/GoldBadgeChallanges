@@ -8,10 +8,10 @@ namespace Challange2_ClassLibrary
 {
     public class ClaimsRepository
     {
-        protected readonly Queue<Claim> _claimDirecoty = new Queue<Claim>();
+        protected readonly Queue<Claims> _claimDirecoty = new Queue<Claims>();
 
         //C
-        public bool AddClaim(Claim claim)
+        public bool AddClaim(Claims claim)
         {
             int startCount = _claimDirecoty.Count();
             _claimDirecoty.Enqueue(claim);
@@ -19,7 +19,7 @@ namespace Challange2_ClassLibrary
         }
 
         //R
-        public Queue<Claim> GetAllClaims()
+        public Queue<Claims> GetAllClaims()
         {
             return _claimDirecoty;
         }
@@ -40,9 +40,9 @@ namespace Challange2_ClassLibrary
 
         //U
         //D
-        public Claim DeleteClaim()
+        public Claims DeleteClaim()
         {
-            Claim deleteResult = _claimDirecoty.Dequeue();
+            Claims deleteResult = _claimDirecoty.Dequeue();
             return deleteResult;
         }
     }

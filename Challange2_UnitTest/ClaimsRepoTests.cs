@@ -10,12 +10,12 @@ namespace Challange2_UnitTest
     public class ClaimsRepoTests
     {
         private ClaimsRepository _repo;
-        private Claim _claimItem;
+        private Claims _claimItem;
         [TestInitialize]
         public void Arrange()
         {
             _repo = new ClaimsRepository();
-            _claimItem = new Claim(3, ClaimTypes.Home, "Home Alone happend in your house", 420.50, new DateTime(2010, 12, 25), new DateTime(2011, 1, 4));
+            _claimItem = new Claims(3, ClaimTypes.Home, "Home Alone happend in your house", 420.50, new DateTime(2010, 12, 25), new DateTime(2011, 1, 4));
 
             _repo.AddClaim(_claimItem);
         }
@@ -23,7 +23,7 @@ namespace Challange2_UnitTest
         [TestMethod]
         public void AddClaimIsTrue()
         {
-            bool worked = _repo.AddClaim(new Claim());
+            bool worked = _repo.AddClaim(new Claims());
 
             Assert.IsTrue(worked);
         }
@@ -33,7 +33,7 @@ namespace Challange2_UnitTest
         {
             //Arrange
             //Act
-            Queue<Claim> queue = _repo.GetAllClaims();
+            Queue<Claims> queue = _repo.GetAllClaims();
             bool claimInRepo = queue.Contains(_claimItem);
 
             //Assert
@@ -45,7 +45,7 @@ namespace Challange2_UnitTest
         {
             //Act
             _repo.DeleteClaim();
-            Queue<Claim> queue = _repo.GetAllClaims();
+            Queue<Claims> queue = _repo.GetAllClaims();
             bool claimInRepo = queue.Contains(_claimItem);
 
             //Assert
