@@ -93,9 +93,30 @@ namespace Challange3_ConsoleApp.UI
             bool addingRooms = false;
             do
             {
-                Console.Write("List a door that it needs access to: ");
-                string room = Console.ReadLine();
+                string room = null;
+                bool roomWorks = false;
+                while (!roomWorks)
+                {
+                    Console.Write("List a door that it needs access to: ");
+                    room = Console.ReadLine();
+                    if (room.Length > 2)
+                    {
+                        Console.WriteLine("Not a valid room.");
+                        ContinueMessage();
+                    }
+                    else if(room.Length < 2)
+                    {
+                        Console.WriteLine("Not a valid room.");
+                        ContinueMessage();
+                    }
+                    else
+                    {
+                        roomWorks = true;
+                    }
+                }
                 listOfRooms.Add(room);
+
+                //Keep going loop
                 bool validAns = false;
                 while (!validAns)
                 {
@@ -139,47 +160,57 @@ namespace Challange3_ConsoleApp.UI
             Console.Write("What is the badge number to update? ");
             int id = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine($"{id} has access to doors {string.Join(" & ",badges[id])}");
-            bool validOption = false;
-            while (!validOption)
+            bool keepMakingChanges = false;
+            while (!keepMakingChanges)
             {
-                Console.WriteLine("What would you like to do?\n" +
-                    "1. Remove a door\n" +
-                    "2. Add a door");
-                string answer = Console.ReadLine().ToLower();
-                if (answer == "1" || answer == "remove a door")
+                bool validOption = false;
+                while (!validOption)
                 {
-                    Console.Write("Which door would you like to remove? ");
-                    string door = Console.ReadLine();
-                    bool delete = _repo.RemoveExisitngDoor(id, door);
-                    if (delete)
+                    Console.WriteLine("What would you like to do?\n" +
+                        "1. Remove a door\n" +
+                        "2. Add a door");
+                    string answer = Console.ReadLine().ToLower();
+                    if (answer == "1" || answer == "remove a door")
                     {
-                        Console.WriteLine("Door Removed");
+                        Console.Write("Which door would you like to remove? ");
+                        string door = Console.ReadLine();
+                        bool delete = _repo.RemoveExisitngDoor(id, door);
+                        if (delete)
+                        {
+                            Console.WriteLine("Door Removed");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Door {door} does not exist for this badge");
+                        }
+                        validOption = true;
+                    }
+                    else if (answer == "2" || answer == "add a door")
+                    {
+                        Console.Write("Which door would you like to add? ");
+                        string door = Console.ReadLine();
+                        bool delete = _repo.UpdateExistingBadge(id, door);
+                        if (delete)
+                        {
+                            Console.WriteLine("Door added");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Door {door} already stored for this badge");
+                        }
+                        validOption = true;
                     }
                     else
                     {
-                        Console.WriteLine($"Door {door} does not exist for this badge");
+                        Console.WriteLine("Invalid input");
+                        ContinueMessage();
                     }
-                    validOption = true;
                 }
-                else if (answer == "2" || answer == "add a door")
+                Console.Write("Do you want to keep making changes to this door (y/n)? ");
+                string keepGoing = Console.ReadLine();
+                if(keepGoing == "n" || keepGoing == "no")
                 {
-                    Console.Write("Which door would you like to add? ");
-                    string door = Console.ReadLine();
-                    bool delete = _repo.UpdateExistingBadge(id, door);
-                    if (delete)
-                    {
-                        Console.WriteLine("Door added");
-                    }
-                    else
-                    {
-                        Console.WriteLine($"Door {door} already stored for this badge");
-                    }
-                    validOption = true;
-                }
-                else
-                {
-                    Console.WriteLine("Invalid input");
-                    ContinueMessage();
+                    keepMakingChanges = true;
                 }
             }
             Console.WriteLine($"{id} has access to doors {string.Join(" & ", badges[id])}");
@@ -197,11 +228,6 @@ namespace Challange3_ConsoleApp.UI
                 Console.WriteLine($"{badge, -17}{string.Join(", ",badges[badge])}");
             }
             ContinueMessage();
-        }
-
-        public void CheckIfKeyAlreadyExist(int id)
-        {
-            
         }
 
         public void ContinueMessage()
