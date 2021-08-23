@@ -47,7 +47,7 @@ namespace Challange2_ConsoleApp.UI
                     case "1":
                     case "see":
                     case "see all claims":
-                        //AddMenuItem();
+                        SeeAllItems();
                         break;
                     case "2":
                     case "take car of next claim":
@@ -69,6 +69,21 @@ namespace Challange2_ConsoleApp.UI
                 }
             }
         }
+        public void SeeAllItems()
+        {
+            Console.Clear();
+            Console.WriteLine("  ClaimID       Type         Description            Amount      DateOfAccident      DateOfClaim         IsValid\n");
+            Queue<Claims> allClaims = _repo.GetAllClaims();
+            foreach (Claims claim in allClaims)
+            {
+                string value = "$"+string.Format("{0:0.00}", claim.ClaimAmount);
+                Console.WriteLine($"{claim.ClaimId, -15} {claim.ClaimType, -10} {claim.Description, -24}" +
+                    $" {value, -15} {claim.DateOfIncident.ToShortDateString(), -15} {claim.DateOfClaim.ToShortDateString(), -20} {claim.IsValid, 2}\n");
+            }
+            ContinueMessage();
+        }
+
+
         public void ContinueMessage()
         {
             Console.WriteLine("Press any key to continue");
