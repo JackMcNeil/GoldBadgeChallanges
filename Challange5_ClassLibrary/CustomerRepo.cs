@@ -40,6 +40,20 @@ namespace Challange5_ClassLibrary
             return null;
         }
 
+        public List<Customer> GetCustomersByType(TypeOfCustomer type)
+        {
+            List<Customer> customers = GetAllCustomers();
+            List<Customer> newList = new List<Customer>();
+            foreach (Customer custy in customers)
+            {
+                if (custy.CustomerType == type)
+                {
+                    newList.Add(custy);
+                }
+            }
+            return newList;
+        }
+
         //U
         public bool UpdateCustomer(Customer custy, string name)
         {
@@ -54,6 +68,7 @@ namespace Challange5_ClassLibrary
             return false;
         }
 
+        //D
         public bool DeleteCustomer(Customer custy)
         {
             return _customerDirectory.Remove(custy);

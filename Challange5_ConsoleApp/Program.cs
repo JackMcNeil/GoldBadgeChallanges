@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Challange5_ConsoleApp.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,8 @@ namespace Challange5_ConsoleApp
     {
         static void Main(string[] args)
         {
+            ProgramUI program = new ProgramUI();
+            program.Run();
         }
     }
 }
