@@ -26,7 +26,7 @@ namespace Challange4_ClassLibrary
         {
             get
             {
-                return TotalCost / Attendees;
+                return Math.Round(TotalCost / Attendees , 2);
             }
         }
     }
