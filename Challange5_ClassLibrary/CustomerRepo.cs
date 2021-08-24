@@ -26,15 +26,14 @@ namespace Challange5_ClassLibrary
             return _customerDirectory;
         }
 
-        public Customer GetCustomerByName(string Name)
+        public Customer GetCustomerByName(string name)
         {
             List<Customer> customers = GetAllCustomers();
-            Customer newCustomer = new Customer();
             foreach (Customer custy in customers)
             {
-                if (custy.FullName == Name)
+                if (custy.FullName.ToLower() == name.ToLower())
                 {
-                    return newCustomer;
+                    return custy;
                 }
             }
             Console.WriteLine("No customer found with that name");
