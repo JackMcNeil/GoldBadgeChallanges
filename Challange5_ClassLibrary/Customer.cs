@@ -31,7 +31,7 @@ namespace Challange5_ClassLibrary
         {
             get
             {
-                return FirstName + LastName;
+                return FirstName + " " + LastName;
             }
         }
         public TypeOfCustomer CustomerType { get; set; }
