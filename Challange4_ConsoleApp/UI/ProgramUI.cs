@@ -260,7 +260,7 @@ namespace Challange4_ConsoleApp.UI
                 }
             }
 
-            Console.WriteLine($"\nAll golf outings costs are ${golfTotal}." +
+            Console.WriteLine($"All golf outings costs are ${golfTotal}." +
                 $"\nAll bowling outings costs are ${bowlingTotal}." +
                 $"\nAll amusement park outings costs are ${amusementTotal}." +
                 $"\nAll concert outings costs are ${concertTotal}.");
@@ -269,7 +269,7 @@ namespace Challange4_ConsoleApp.UI
 
         public void ContinueMessage()
         {
-            Console.WriteLine("Press any key to continue");
+            Console.WriteLine("\nPress any key to continue");
             Console.ReadKey();
         }
 
