@@ -8,6 +8,7 @@ namespace Challange6_ClassLibrary.CarTypes
 {
     public class Hybrid : Gas 
     {
+        public Hybrid() { }
         public Hybrid(string make, string model, int year, int id, double milesPerGallon, int tankSize, int hoursToCharge) : base(make, model, year, id, milesPerGallon, tankSize) 
         {
             HoursToCharge = hoursToCharge;

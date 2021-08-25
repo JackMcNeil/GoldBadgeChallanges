@@ -8,7 +8,7 @@ namespace Challange6_ClassLibrary
 {
     public class CarsRepository
     {
-        private readonly List<Car> _carDirectory = new List<Car>();
+        protected readonly List<Car> _carDirectory = new List<Car>();
 
         //C
         public bool AddCarToDirectory(Car car)
@@ -39,6 +39,7 @@ namespace Challange6_ClassLibrary
         }
 
         //U
+        // ON the other repository that inherits this one so each type could get updated with all properties
         /*
         public bool UpdateACar(Car newCar, int id)
         {
