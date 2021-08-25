@@ -79,10 +79,10 @@ namespace Challange_1.UI
             _menuNumber++;
             //Name
             Console.WriteLine("What is the name of the new item?");
-            string name = Console.ReadLine();
+            string name = GetProperString();
             //Description
             Console.WriteLine("What is a desctiption of the new item?");
-            string description = Console.ReadLine();
+            string description = GetProperString();
             //Ingredients
             List<string> ingredients = GetIngredients();
             //Price
@@ -101,6 +101,25 @@ namespace Challange_1.UI
             //Add Item
             Menu newItem = new Menu(menuNumber, name, description, ingredients, price);
             _repo.AddMenuItem(newItem);
+        }
+
+        public string GetProperString()
+        {
+            bool valid = false;
+            while (!valid)
+            {
+                string response = Console.ReadLine();
+                bool nullOr = string.IsNullOrEmpty(response);
+                if (nullOr)
+                {
+                    Console.WriteLine("Please input a valid Answer");
+                }
+                else
+                {
+                    return response;
+                }
+            }
+            return null;
         }
 
         public void ShowAllItems()
@@ -151,8 +170,8 @@ namespace Challange_1.UI
             while (moreIngredients)
             {
                 Console.Write("Ingredient: ");
-                string individualIngredient = Console.ReadLine();
-                if (individualIngredient == "done" || individualIngredient == "Done")
+                string individualIngredient = GetProperString();
+                if (individualIngredient == "done" || individualIngredient == "Done" || individualIngredient == "DONE")
                 {
                     moreIngredients = false;
                 }

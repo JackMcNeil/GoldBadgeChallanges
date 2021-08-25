@@ -95,12 +95,12 @@ namespace Challange2_ConsoleApp.UI
             Console.WriteLine($"ClaimID: {theQueue.ClaimId}\nType: {theQueue.ClaimType}\nDescription: {theQueue.Description}\nAmount: {theQueue.ClaimAmount}\nDateOfAccident: {theQueue.DateOfClaim.ToShortDateString()}\nDateOfClaim: {theQueue.DateOfIncident.ToShortDateString()}\nIsValid: {theQueue.IsValid}\n\n");
             //Asking to deal with claim 
             bool validResponse = false;
-            Console.Write("Do you want to deal with this claim now(y/n)? ");
-            string ans = Console.ReadLine().ToLower();
             //Dealing with claim
             while (!validResponse)
             {
-                if (ans == "y")
+                Console.Write("Do you want to deal with this claim now(y/n)? ");
+                string ans = Console.ReadLine().ToLower();
+                if (ans == "y" || ans == "yes")
                 {
                     _repo.DeleteClaim();
                     Console.WriteLine("Claim was dealt with!");
@@ -154,7 +154,7 @@ namespace Challange2_ConsoleApp.UI
             }
             //Description
             Console.Write("Enter a claim description: ");
-            string description = Console.ReadLine();
+            string description = GetProperString();
             newClaim.Description = description;
             //Amount
             Console.Write("Enter the amount of damage: ");
@@ -172,9 +172,11 @@ namespace Challange2_ConsoleApp.UI
                 }
             newClaim.ClaimAmount = amount;
             //Date of accident
+            Console.Write("Date of Accident(mm/dd/yy): ");
             DateTime accident = DateMaker();
             newClaim.DateOfIncident = accident;
             //Date of Claim
+            Console.Write("Date of Claim(mm/dd/yy): ");
             DateTime claim = DateMaker();
             newClaim.DateOfClaim = claim;
             //Add to repo
@@ -190,7 +192,6 @@ namespace Challange2_ConsoleApp.UI
                 try
                 {
                     string pattern = "M/dd/y";
-                    Console.Write("Date of Accident(mm/dd/yy): ");
                     date = DateTime.ParseExact(Console.ReadLine(), pattern, null);
                     validDate = true;
                     return date;
@@ -202,6 +203,25 @@ namespace Challange2_ConsoleApp.UI
                 }
             }
             return new DateTime(0, 0, 0);
+        }
+
+        public string GetProperString()
+        {
+            bool valid = false;
+            while (!valid)
+            {
+                string response = Console.ReadLine();
+                bool nullOr = string.IsNullOrEmpty(response);
+                if (nullOr)
+                {
+                    Console.WriteLine("Please input a valid Answer");
+                }
+                else
+                {
+                    return response;
+                }
+            }
+            return null;
         }
 
         public void ContinueMessage()

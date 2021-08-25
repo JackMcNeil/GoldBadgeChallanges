@@ -9,6 +9,10 @@ namespace Challange2_ClassLibrary
     public enum ClaimTypes{ Car, Home, Theft};
     public class Claims
     {
+        //Fields
+        private double _claimAmount;
+        private int _claimId;
+
         //Constructors
         public Claims() { }
         public Claims(int claimId, ClaimTypes claimType, string description, double claimAmount, DateTime dateOfIncident, DateTime dateOfClaim)
@@ -22,10 +26,10 @@ namespace Challange2_ClassLibrary
         }
 
         // Properties
-        public int ClaimId { get; set; }
+        public int ClaimId { get => _claimId; set => _claimId = value; }
         public ClaimTypes ClaimType { get; set; }
         public string Description { get; set; }
-        public double ClaimAmount { get; set; }
+        public double ClaimAmount { get => _claimAmount; set => _claimAmount = value; }
         public DateTime DateOfIncident { get; set; }
         public DateTime DateOfClaim { get; set; }
         public bool IsValid

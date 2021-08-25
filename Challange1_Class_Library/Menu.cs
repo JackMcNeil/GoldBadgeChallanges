@@ -10,13 +10,14 @@ namespace Challange1_Class_Library
     {
 
         //Fields?? 
-
+        private int _menuNumber;
+        private List<string> _Ingredients;
         //Properties 
-        public int MenuNumber { get; set; }
         public string MealName { get; set; }
         public string Description { get; set; }
-        public List<String> Ingredients { get; set; }
+        public List<String> Ingredients { get { return _Ingredients; } set { _Ingredients = value; } }
         public double Price { get; set; }
+        public int MenuNumber { get => _menuNumber; set => _menuNumber = value; }
 
         //Constructors
         public Menu() { }
