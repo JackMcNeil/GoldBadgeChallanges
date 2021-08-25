@@ -19,7 +19,7 @@ namespace Challange6_UnitTest
             _repo = new GreenPlanRepo();
             _electric = new Electric("Tesla", "S", 2020, 1, 4, 300);
             _gas = new Gas("Ford", "F-150", 2019, 2, 5.5, 30);
-            _hybird = new Hybrid("Toyota", "Rav-4", 2018, 3, 30, 14, 3);
+            _hybird = new Hybrid("Toyota", "Rav-4", 2018, 3, 30, 3);
 
             _repo.AddCarToDirectory(_electric);
             _repo.AddCarToDirectory(_gas);
@@ -62,6 +62,32 @@ namespace Challange6_UnitTest
             Electric car2 = _repo.GetElectricById(1);
             Assert.IsTrue(updated);
             Console.WriteLine($"{car.Make} {car.Model}");
+        }
+
+        [TestMethod]
+        public void AddTest()
+        {
+            bool add = _repo.AddCarToDirectory(_gas);
+
+            Assert.IsTrue(add);
+        }
+
+        [TestMethod]
+        public void ReturnAllTest()
+        {
+            List<Car> cars = _repo.GetAllCars();
+            bool contain = cars.Contains(_gas);
+
+            Assert.IsTrue(contain);
+
+        }
+
+        [TestMethod]
+        public void RemoveTests()
+        {
+            bool remove = _repo.DeleteACar(_hybird);
+
+            Assert.IsTrue(remove);
         }
     }
 }

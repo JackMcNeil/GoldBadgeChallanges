@@ -102,7 +102,6 @@ namespace Challange6_ClassLibrary
                 hybrid.Year = newCar.Year;
                 hybrid.MilesPerGallon = newCar.MilesPerGallon;
                 hybrid.HoursToCharge = newCar.HoursToCharge;
-                hybrid.TankSize = newCar.TankSize;
 
                 return true;
             }
