@@ -61,11 +61,11 @@ namespace Challange6_ConsoleApp.UI
                         break;
                     case "4":
                     case "update":
-                        //CarsMenu("Gas");
+                        UpdateACar();
                         break;
                     case "5":
                     case "delete":
-                        //delete
+                        DeleteACar();
                         break;
                     case "6":
                     case "exit":
@@ -99,7 +99,7 @@ namespace Challange6_ConsoleApp.UI
             if (type == "electric")
             {
                 List<Electric> allElectric = _repo.GetAllElectric();
-                //Console.WriteLine("Make      Model       Year      Charge Time      Miles/Charge     ID\n");
+                Console.WriteLine("Make      Model       Year      Charge Time      Miles/Charge     ID\n");
                 foreach (Electric car in allElectric)
                 {
                     PrintElectric(car);
@@ -107,6 +107,7 @@ namespace Challange6_ConsoleApp.UI
             }
             else if(type == "hybrid")
             {
+                Console.WriteLine("Make      Model       Year      Charge Time      Miles/Gallon     ID\n");
                 List<Hybrid> allHybrid = _repo.GetAllHybrid();
                 foreach(Hybrid car in allHybrid)
                 {
@@ -115,6 +116,7 @@ namespace Challange6_ConsoleApp.UI
             }
             else
             {
+                Console.WriteLine("Make      Model       Year      Miles/Gallon      Tank Size     ID\n");
                 List<Gas> allGas = _repo.GetAllGas();
                 foreach (Gas car in allGas)
                 {
@@ -126,17 +128,17 @@ namespace Challange6_ConsoleApp.UI
 
         public void PrintElectric(Electric car)
         {
-            Console.WriteLine($"{car.Make,-10}{car.Model,-12}{car.Year,-10}{car.HoursToCharge,-10}{car.MilesOnCharge,-10}{car.Id,-10}");
+            Console.WriteLine($"{car.Make,-10}{car.Model,-12}{car.Year,-5}{car.HoursToCharge, 7} Hours {car.MilesOnCharge,10} Miles{car.Id,10}\n");
         }
         
         public void PrintHybrid(Hybrid car)
         {
-            Console.WriteLine($"{car.Make,-10}{car.Model,-12}{car.Year,-10}{car.HoursToCharge,-10}{car.MilesPerGallon,-10}{car.Id,-10}");
+            Console.WriteLine($"{car.Make,-10}{car.Model,-12}{car.Year,-5}{car.HoursToCharge, 7} Hours {car.MilesPerGallon,10} MPG{car.Id, 12}\n");
         }
 
         public void PrintGas(Gas car)
         {
-            Console.WriteLine($"{car.Make,-10}{car.Model,-12}{car.Year,-10}{car.MilesPerGallon,-10}{car.TankSize}{car.Id,-10}");
+            Console.WriteLine($"{car.Make,-10}{car.Model,-12}{car.Year,-5}{car.MilesPerGallon,10} MPG {car.TankSize, 10} Gallons{car.Id,6}\n");
         }
 
         public string AskForType()
@@ -179,7 +181,7 @@ namespace Challange6_ConsoleApp.UI
                 }
                 else
                 {
-                    Console.WriteLine("Invalid Input");
+                    Console.Write("Invalid Input. Enter another number: ");
                 }
             }
             return 0;
@@ -203,7 +205,7 @@ namespace Challange6_ConsoleApp.UI
                 _id++;
                 Console.Write("Hours to Charge: ");
                 electric.HoursToCharge = GetValidInt();
-                Console.Write("Miles/Charge");
+                Console.Write("Miles/Charge: ");
                 electric.MilesOnCharge = GetValidInt();
                 Console.WriteLine("Car added");
                 _repo.AddCarToDirectory(electric);
@@ -247,54 +249,144 @@ namespace Challange6_ConsoleApp.UI
             ContinueMessage();
         }
 
-
-
-
-
-        /*
-        public void CarsMenu(string carType)
+        public void UpdateACar()
         {
-            bool continueToRun = true;
-            while (continueToRun)
+            Console.Clear();
+            string type = AskForType();
+            Console.Clear();
+            if (type == "electric")
             {
-                Console.Clear();
-                Console.WriteLine($"{carType} Menu:\n" +
-                    $"1. See all {carType} cars\n" +
-                    $"2. Add {carType} car\n" +
-                    $"3. Update {carType} car\n" +
-                    $"4. Delete {carType} car\n" +
-                    "5. Exit");
-                string response = Console.ReadLine().ToLower();
-                switch (response)
+                List<Electric> allElectric = _repo.GetAllElectric();
+                Console.WriteLine("Make      Model       Year      Charge Time      Miles/Charge     ID\n");
+                foreach (Electric car in allElectric)
                 {
-                    case "1":
-                    case "all":
-                    case "see all cars":
-                        //AddNewCustomer();
-                        break;
-                    case "2":
-                    case "add":
-                        //SeeAllCustomers();
-                        break;
-                    case "3":
-                    case "update":
-                        //SeeCustomersByType();
-                        break;
-                    case "4":
-                    case "delete":
-                        //UpdateExistentCustomers();
-                        break;
-                    case "5":
-                    case "exit":
-                        continueToRun = false;
-                        break;
-                    default:
-                        Console.WriteLine("Invalid selection");
-                        ContinueMessage();
-                        break;
+                    PrintElectric(car);
+                }
+                Console.Write("What is the Id number of the car you want to update? ");
+                int idToUpdate = GetValidInt();
+                Electric carToUpdate = _repo.GetElectricById(idToUpdate);
+                if (carToUpdate == null)
+                {
+                    Console.WriteLine("No car with that Id found in the electric car list");
+                }
+                else
+                {
+                    Electric electric = new Electric();
+                    Console.Write("Make: ");
+                    electric.Make = Console.ReadLine();
+                    Console.Write("Model: ");
+                    electric.Model = Console.ReadLine();
+                    Console.Write("Year: ");
+                    electric.Year = GetValidInt();
+                    electric.Id = carToUpdate.Id;
+                    Console.Write("Hours to Charge: ");
+                    electric.HoursToCharge = GetValidInt();
+                    Console.Write("Miles/Charge: ");
+                    electric.MilesOnCharge = GetValidInt();
+                    Console.WriteLine("Car Updated");
+
+                    _repo.UpdateElectric(electric);
                 }
             }
-        }*/
+            else if (type == "hybrid")
+            {
+                List<Hybrid> allHybrid = _repo.GetAllHybrid();
+                Console.WriteLine("Make      Model       Year      Charge Time      Miles/Gallon     ID\n");
+                foreach (Hybrid car in allHybrid)
+                {
+                    PrintHybrid(car);
+                }
+                Console.Write("What is the Id number of the car you want to update? ");
+                int idToUpdate = GetValidInt();
+                Hybrid carToUpdate = _repo.GetHybridById(idToUpdate);
+                if (carToUpdate == null)
+                {
+                    Console.WriteLine("No car with that Id found in the Hybrid car list");
+                }
+                else
+                {
+                    Hybrid hybrid = new Hybrid();
+                    Console.Write("Make: ");
+                    hybrid.Make = Console.ReadLine();
+                    Console.Write("Model: ");
+                    hybrid.Model = Console.ReadLine();
+                    Console.Write("Year: ");
+                    hybrid.Year = GetValidInt();
+                    hybrid.Id = carToUpdate.Id;
+                    Console.Write("Hours to Charge: ");
+                    hybrid.HoursToCharge = GetValidInt();
+                    Console.Write("Miles/Gallon: ");
+                    hybrid.MilesPerGallon = GetValidInt();
+                    Console.WriteLine("Car Updated");
+
+                    _repo.UpdateHybird(hybrid);
+                }
+            }
+            else
+            {
+                List<Gas> allGas = _repo.GetAllGas();
+                Console.WriteLine("Make      Model       Year      Miles/Gallon      Tank Size     ID\n");
+                foreach (Gas car in allGas)
+                {
+                    PrintGas(car);
+                }
+                Console.Write("What is the Id number of the car you want to update? ");
+                int idToUpdate = GetValidInt();
+                Gas carToUpdate = _repo.GetGasById(idToUpdate);
+                if (carToUpdate == null)
+                {
+                    Console.WriteLine("No car with that Id found in the Gas car list");
+                }
+                else
+                {
+                    Gas gas = new Gas();
+                    Console.Write("Make: ");
+                    gas.Make = Console.ReadLine();
+                    Console.Write("Model: ");
+                    gas.Model = Console.ReadLine();
+                    Console.Write("Year: ");
+                    gas.Year = GetValidInt();
+                    gas.Id = carToUpdate.Id;
+                    Console.Write("Tank Size: ");
+                    gas.TankSize = GetValidInt();
+                    Console.Write("Miles/Gallon: ");
+                    gas.MilesPerGallon = GetValidInt();
+                    Console.WriteLine("Car added");
+
+                    _repo.UpdateGas(gas);
+                }
+            }
+            ContinueMessage();
+        }
+
+        public void DeleteACar()
+        {
+            Console.Clear();
+            Console.Write("What is the Id of the car you want to delete? ");
+            int idToDelete = GetValidInt();
+            Car carToDelete = _repo.GetCarById(idToDelete);
+            Console.WriteLine($"{carToDelete.Make, -10}{carToDelete.Model,-10}{carToDelete.Year,-10}{carToDelete.Id,-10} ");
+            Console.Write("Are you sure you want to delete? (y/n) ");
+            bool validInput = false;
+            while (!validInput)
+            {
+                string ans = Console.ReadLine().ToLower();
+                if (ans == "yes" || ans == "y")
+                {
+                    _repo.DeleteACar(carToDelete);
+                    validInput = true;
+                }
+                else if(ans == "no" || ans == "n")
+                {
+                    validInput = true;
+                }
+                else
+                {
+                    Console.WriteLine("Enter a valid answer (y/n)");
+                }
+            }
+            ContinueMessage();
+        }
 
         public void ContinueMessage()
         {
