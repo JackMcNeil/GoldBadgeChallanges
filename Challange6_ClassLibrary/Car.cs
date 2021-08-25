@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Challange6_ClassLibrary
 {
-    public class Car
+     public abstract class Car
     {
         public Car() { }
         public Car(string make, string model, int year, int id)
