@@ -12,7 +12,7 @@
 - **Challange 6** - Komodo Green Plan
 
 ### Comments
-> *Input Validation* - I made use of the try catch feature and I really liked it. I had never used a feature like that in code before. I feel like it makes cleaner code than just the program terminating if it can't figure convert an string to an integer. I also made a "GetProperString" and "GetProperNumber" method that I implemented in each challange to require any string to at least have one character. 
+> *Challange 7* - I did not have time to finsih challange 7. I thought it would be fun to try to make a minimum viable product as fast as possible. That is what challange 7 is supposed to be so if the code isn't great or answers the prompt thats why. 
 
 > *Challange 6* - For challange 6 I struggled through it but I have a much better understanind of ineritance and also interfaces now because of it. I think there's parts of it that could have been simplified but I at least get a MVP that works and functions all the way through. 
 
