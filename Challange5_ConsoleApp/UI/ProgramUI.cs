@@ -84,10 +84,10 @@ namespace Challange5_ConsoleApp.UI
             Customer cust = new Customer();
             //Name
             Console.Write("Enter Customers First Name: ");
-            string firstName = Console.ReadLine();
+            string firstName = GetProperString();
             cust.FirstName = firstName;
             Console.Write("Enter Customers Last Name: ");
-            string lastName = Console.ReadLine();
+            string lastName = GetProperString();
             cust.LastName = lastName;
             //Type
             bool valid = false;
@@ -190,9 +190,9 @@ namespace Challange5_ConsoleApp.UI
                 printList.Add(result);
                 PrintCustomers(printList);
                 Console.Write("Enter new first name: ");
-                custy.FirstName = Console.ReadLine();
+                custy.FirstName = GetProperString();
                 Console.Write("Enter new last name: ");
-                custy.LastName = Console.ReadLine();
+                custy.LastName = GetProperString();
                 //Type
                 bool valid = false;
                 while (!valid)
@@ -248,6 +248,25 @@ namespace Challange5_ConsoleApp.UI
                 Console.WriteLine("Person Not Found");
             }
             ContinueMessage();
+        }
+
+        public string GetProperString()
+        {
+            bool valid = false;
+            while (!valid)
+            {
+                string response = Console.ReadLine();
+                bool nullOr = string.IsNullOrEmpty(response);
+                if (nullOr)
+                {
+                    Console.WriteLine("Please input a valid Answer");
+                }
+                else
+                {
+                    return response;
+                }
+            }
+            return null;
         }
 
         public void ContinueMessage()

@@ -8,6 +8,7 @@ namespace Challange6_ClassLibrary
 {
      public abstract class Car
     {
+        private int _id;
         public Car() { }
         public Car(string make, string model, int year, int id)
         {
@@ -20,7 +21,6 @@ namespace Challange6_ClassLibrary
         public string Make { get; set; }
         public string Model { get; set; }
         public int Year { get; set; }
-        public int Id { get; set; }
-
+        public int Id { get => _id; set => _id = value; }
     }
 }

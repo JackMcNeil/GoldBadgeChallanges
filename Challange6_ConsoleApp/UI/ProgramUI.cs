@@ -187,6 +187,25 @@ namespace Challange6_ConsoleApp.UI
             return 0;
         }
 
+        public string GetProperString()
+        {
+            bool valid = false;
+            while (!valid)
+            {
+                string response = Console.ReadLine();
+                bool nullOr = string.IsNullOrEmpty(response);
+                if (nullOr)
+                {
+                    Console.WriteLine("Please input a valid Answer");
+                }
+                else
+                {
+                    return response;
+                }
+            }
+            return null;
+        }
+
         public void AddACar()
         {
             Console.Clear();
@@ -196,9 +215,9 @@ namespace Challange6_ConsoleApp.UI
             {
                 Electric electric = new Electric();
                 Console.Write("Make: ");
-                electric.Make = Console.ReadLine();
+                electric.Make = GetProperString();
                 Console.Write("Model: ");
-                electric.Model = Console.ReadLine();
+                electric.Model = GetProperString();
                 Console.Write("Year: ");
                 electric.Year = GetValidInt();
                 electric.Id = _id;
@@ -214,9 +233,9 @@ namespace Challange6_ConsoleApp.UI
             {
                 Hybrid hybrid = new Hybrid();
                 Console.Write("Make: ");
-                hybrid.Make = Console.ReadLine();
+                hybrid.Make = GetProperString();
                 Console.Write("Model: ");
-                hybrid.Model = Console.ReadLine();
+                hybrid.Model = GetProperString();
                 Console.Write("Year: ");
                 hybrid.Year = GetValidInt();
                 hybrid.Id = _id;
@@ -232,9 +251,9 @@ namespace Challange6_ConsoleApp.UI
             {
                 Gas gas = new Gas();
                 Console.Write("Make: ");
-                gas.Make = Console.ReadLine();
+                gas.Make = GetProperString();
                 Console.Write("Model: ");
-                gas.Model = Console.ReadLine();
+                gas.Model = GetProperString();
                 Console.Write("Year: ");
                 gas.Year = GetValidInt();
                 gas.Id = _id;
@@ -273,9 +292,9 @@ namespace Challange6_ConsoleApp.UI
                 {
                     Electric electric = new Electric();
                     Console.Write("Make: ");
-                    electric.Make = Console.ReadLine();
+                    electric.Make = GetProperString();
                     Console.Write("Model: ");
-                    electric.Model = Console.ReadLine();
+                    electric.Model = GetProperString();
                     Console.Write("Year: ");
                     electric.Year = GetValidInt();
                     electric.Id = carToUpdate.Id;
@@ -307,9 +326,9 @@ namespace Challange6_ConsoleApp.UI
                 {
                     Hybrid hybrid = new Hybrid();
                     Console.Write("Make: ");
-                    hybrid.Make = Console.ReadLine();
+                    hybrid.Make = GetProperString();
                     Console.Write("Model: ");
-                    hybrid.Model = Console.ReadLine();
+                    hybrid.Model = GetProperString();
                     Console.Write("Year: ");
                     hybrid.Year = GetValidInt();
                     hybrid.Id = carToUpdate.Id;
@@ -341,9 +360,9 @@ namespace Challange6_ConsoleApp.UI
                 {
                     Gas gas = new Gas();
                     Console.Write("Make: ");
-                    gas.Make = Console.ReadLine();
+                    gas.Make = GetProperString();
                     Console.Write("Model: ");
-                    gas.Model = Console.ReadLine();
+                    gas.Model = GetProperString();
                     Console.Write("Year: ");
                     gas.Year = GetValidInt();
                     gas.Id = carToUpdate.Id;

@@ -10,6 +10,9 @@ namespace Challange5_ClassLibrary
 
     public class Customer
     {
+        private string _firstName;
+        private string _lastName;
+        
         Dictionary<TypeOfCustomer, string> emailDictionary = new Dictionary<TypeOfCustomer, string>()
         {
             {TypeOfCustomer.Potential, "We currently have the lowest rates on Helicopter Insurance!"},
@@ -25,13 +28,15 @@ namespace Challange5_ClassLibrary
             CustomerType = customerType;
         }
 
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string FirstName { get { return _firstName; } set { _firstName = value; } }
+        public string LastName { get { return _lastName; } set { _lastName = value; } }
         public string FullName
         {
             get
             {
-                return FirstName + " " + LastName;
+                return _firstName + " " + _lastName;
+            }
+            set { 
             }
         }
         public TypeOfCustomer CustomerType { get; set; }
