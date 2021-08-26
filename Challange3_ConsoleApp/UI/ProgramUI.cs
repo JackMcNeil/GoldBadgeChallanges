@@ -139,7 +139,7 @@ namespace Challange3_ConsoleApp.UI
                     }
                 }
             } while (addingRooms);
-            badgeToAdd.BadgeID = id;
+            badgeToAdd.BadgeId = id;
             badgeToAdd.DoorNames = listOfRooms;
             Dictionary<int, List<string>> badges = _repo.GetAllBadges();
             if (badges.ContainsKey(id))
@@ -207,6 +207,7 @@ namespace Challange3_ConsoleApp.UI
                     }
                 }
                 Console.Write("Do you want to keep making changes to this door (y/n)? ");
+                Console.Clear();
                 string keepGoing = Console.ReadLine();
                 if(keepGoing == "n" || keepGoing == "no")
                 {

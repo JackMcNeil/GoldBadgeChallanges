@@ -9,6 +9,8 @@ namespace Challange4_ClassLibrary
     public enum EventTypes { Golf, Bowling, AmusementPark, Concert}
     public class Outings
     {
+        private double _totalCost;
+
         public Outings() { }
         public Outings(EventTypes eventType, int attendees, DateTime date, double totalCost)
         {
@@ -21,7 +23,7 @@ namespace Challange4_ClassLibrary
         public EventTypes Event { get; set; }
         public int Attendees { get; set; }
         public DateTime Date { get; set; }
-        public double TotalCost { get; set; }
+        public double TotalCost { get => _totalCost; set => _totalCost = value; }
         public double TotalCostPerPerson
         {
             get
@@ -29,5 +31,6 @@ namespace Challange4_ClassLibrary
                 return Math.Round(TotalCost / Attendees , 2);
             }
         }
+
     }
 }

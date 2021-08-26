@@ -8,14 +8,15 @@ namespace Challange3_ClassLibrary
 {
     public class Badge
     {
+        private int _badgeId;
         public Badge() { }
         public Badge(int badgeId, List<string> doorNames)
         {
-            BadgeID = badgeId;
+            BadgeId = badgeId;
             DoorNames = doorNames;
         }
 
-        public int BadgeID { get; set; }
+        public int BadgeId { get => _badgeId; set => _badgeId = value; }
         public List<string> DoorNames { get; set; }
     }
 }

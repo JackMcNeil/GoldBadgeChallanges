@@ -15,7 +15,7 @@ namespace Challange3_ClassLibrary
         public bool AddNewBadge(Badge badge)
         {
             int startingCount = _badgeDictionary.Count();
-            _badgeDictionary.Add(badge.BadgeID,badge.DoorNames);
+            _badgeDictionary.Add(badge.BadgeId,badge.DoorNames);
             return _badgeDictionary.Count() > startingCount;
         }
 
@@ -33,7 +33,7 @@ namespace Challange3_ClassLibrary
             {
                 if (item == id)
                 {
-                    returnBadge.BadgeID = item;
+                    returnBadge.BadgeId = item;
                     returnBadge.DoorNames = _badgeDictionary[item];
                     return returnBadge;
                 }
