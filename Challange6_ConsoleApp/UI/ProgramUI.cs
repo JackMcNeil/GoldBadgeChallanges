@@ -381,6 +381,7 @@ namespace Challange6_ConsoleApp.UI
         public void DeleteACar()
         {
             Console.Clear();
+            SeeAllCars();
             Console.Write("What is the Id of the car you want to delete? ");
             int idToDelete = GetValidInt();
             Car carToDelete = _repo.GetCarById(idToDelete);
