@@ -34,7 +34,7 @@ namespace Challange3_UnitTest
         public void GetAllBadgesTest()
         {
             Dictionary<int, List<string>> dict = _repo.GetAllBadges();
-            bool inDict = dict.ContainsKey(_aBadge.BadgeID);
+            bool inDict = dict.ContainsKey(_aBadge.BadgeId);
 
             Assert.IsTrue(inDict);
         }
@@ -44,7 +44,7 @@ namespace Challange3_UnitTest
         {
             Badge theBadge = _repo.GetBadgeById(420);
 
-            Assert.AreEqual(theBadge.BadgeID, _aBadge.BadgeID);
+            Assert.AreEqual(theBadge.BadgeId, _aBadge.BadgeId);
         }
 
         [TestMethod]
